@@ -1,19 +1,24 @@
 -- Inserir leitores
-INSERT INTO Leitor (NOME, CPF, TELEFONE, EMAIL)
+INSERT INTO leitor (nome, cpf, telefone, email)
 VALUES
-('João Silva', '123.456.789-00', '27999999999', 'joao@email.com'),
-('Maria Souza', '987.654.321-00', '27988888888', 'maria@email.com'),
-('Carlos Andrade', '111.222.333-44', '27977777777', 'carlos@email.com');
+("Marcelo Mindas", "180.081.097-00", "27 99659-2133", "mindasmarcelo@gmail.com");
 
 -- Inserir livros
-INSERT INTO Livro (TITULO, AUTOR, EDITORA, CATEGORIA, QUANTIDADE)
+INSERT INTO Livro (titulo, autor, editora, categoria, quantidade)
 VALUES
-('Dom Casmurro', 'Machado de Assis', 'Record', 'Romance', 3),
-('O Cortiço', 'Aluísio Azevedo', 'Saraiva', 'Realismo', 4),
-('Capitães da Areia', 'Jorge Amado', 'Companhia das Letras', 5);
+('Dom Casmurro', 'Machado de Assis', 'Record', 'Romance', 1),
+('O Cortiço', 'Aluísio Azevedo', 'Saraiva', 'Realismo', 2),
+('Capitães da Areia', 'Jorge Amado', 'Companhia das Letras', 'Romance', 2);
 
 -- Inserir empréstimos
-INSERT INTO Emprestimo (ID_LEITOR, ID_LIVRO, DATA_EMPRESTIMO, DATA_DEVOLUCAO, DATA_DEV_REALIZAFA)
+INSERT INTO emprestimo (id_leitor, id_livro, data_emprestimo, data_devolucao, data_dev_realizad)
 VALUES
-(1, 2, '2025-10-15', '2025-10-25', '2025-10-15'),
-(2, 3, '2025-10-14', '2025-10-24', '2025-10-14');
+(1, 1, '2025-10-15', '2025-10-25', '2025-10-15');
+
+
+INSERT INTO emprestimo (id_leitor, id_livro, data_emprestimo, data_devolucao, data_dev_realizad)
+VALUES
+(1, 3, '2025-10-15', '2025-10-25', '2025-10-15');
+
+
+
