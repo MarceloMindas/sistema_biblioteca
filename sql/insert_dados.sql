@@ -14,13 +14,14 @@ VALUES
 ('Capitães da Areia', 'Jorge Amado', 'Companhia das Letras', 'Romance', 2);
 
 -- Inserir empréstimos
-INSERT INTO emprestimo (id_leitor, id_livro, data_emprestimo, data_devolucao)
+INSERT INTO emprestimo (id_leitor, id_livro, data_emprestimo, data_devolucao_prevista, data_devolucao_realizada)
 VALUES
-(1, 1, '2025-10-15', '2025-10-25'),
-(2, 3, '2025-10-15', '2025-10-25'),
-(3, 2, '2025-10-15', '2025-10-25');
+(1, 1, '2025-10-15', '2025-10-25', '2025-10-25'),
+(2, 3, '2025-10-15', '2025-10-25', '2025-10-25'),
+(3, 2, '2025-10-15', '2025-10-25', '2025-10-25');
 
 SELECT * FROM emprestimo;
+
 
 
 

@@ -1,7 +1,6 @@
 
 #Classe MySQLQueries — adaptada do modelo OracleQueries (Prof. Howard Roatti)
 
-
 import mysql.connector
 
 class MySQLQueries:

@@ -26,7 +26,6 @@ CREATE TABLE Emprestimo (
     data_emprestimo DATE NOT NULL,
     data_devolucao_prevista DATE NOT NULL,
     data_devolucao_realizada DATE NOT NULL,
-    valor_multa DECIMAL(10,2) DEFAULT 0.00, /*talvez tirar*/
     FOREIGN KEY (id_livro) REFERENCES livro(id_livro),
     FOREIGN KEY (id_leitor) REFERENCES leitor(id_leitor)
 );
