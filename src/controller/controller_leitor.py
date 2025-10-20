@@ -25,14 +25,14 @@ class ControllerLeitor:
                 )
 
                 novo_leitor = Leitor(None, nome, cpf, email, telefone)
-                print("✅ Leitor cadastrado com sucesso!")
+                print("Leitor cadastrado com sucesso!")
                 print(novo_leitor.to_string())
                 return novo_leitor
             else:
-                print("⚠️ Leitor já cadastrado.")
+                print("Leitor já cadastrado.")
                 return None
         except Exception as e:
-            print(f"❌ Erro ao cadastrar leitor: {e}")
+            print(f"Erro ao cadastrar leitor: {e}")
         finally:
             mysql.close()
 
@@ -57,13 +57,13 @@ class ControllerLeitor:
                 )
 
                 leitor_atualizado = Leitor(None, nome, cpf, email, telefone)
-                print("✅ Leitor atualizado com sucesso!")
+                print("Leitor atualizado com sucesso!")
                 print(leitor_atualizado.to_string())
                 return leitor_atualizado
             else:
-                print("⚠️ Leitor não encontrado.")
+                print("Leitor não encontrado.")
         except Exception as e:
-            print(f"❌ Erro ao atualizar leitor: {e}")
+            print(f"Erro ao atualizar leitor: {e}")
         finally:
             mysql.close()
 

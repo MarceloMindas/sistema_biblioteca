@@ -1,38 +1,57 @@
-MENU_PRINCIPAL = """Menu Principal
-1 - Relatórios
-2 - Inserir Registros
-3 - Atualizar Registros
-4 - Remover Registros
-5 - Sair
+# config.py
+# Configurações globais para o sistema de Biblioteca
+
+# Menus para interação do sistema
+MENU_PRINCIPAL = """ 
+========== MENU PRINCIPAL ==========
+1 - INSERIR REGISTROS
+2 - EDITAR REGISTROS
+3 - EXCLUIR REGISTROS
+4 - RELATÓRIOS
+0 - SAIR
+====================================
 """
 
-MENU_RELATORIOS = """Relatórios
-1 - Relatório de Pedidos por Fornecedores
-2 - Relatório de Pedidos
-3 - Relatório de Produtos
-4 - Relatório de Clientes
-5 - Relatório de Fornecedores
-6 - Relatório de Itens de Pedidos
-0 - Sair
+MENU_INSERIR = """
+========== MENU DE REGISTROS ==========
+1. REGISTRAR ALUNO
+2. REGISTRAR LIVRO
+3. REGISTRAR EMPRÉSTIMO
+0. VOLTAR AO MENU PRINCIPAL
+=======================================
 """
 
-MENU_ENTIDADES = """Entidades
-1 - PRODUTOS
-2 - CLIENTES
-3 - FORNECEDORES
-4 - PEDIDOS
-5 - ITENS DE PEDIDOS
+MENU_EDITAR = """
+=========== MENU DE EDIÇÃO ===========
+1. EDITAR ALUNO
+2. EDITAR LIVRO
+3. EDITAR EMPRÉSTIMO
+0. VOLTAR AO MENU PRINCIPAL
+=======================================
 """
 
-# Consulta de contagem de registros por tabela
-QUERY_COUNT = 'select count(1) as total_{tabela} from {tabela}'
+MENU_EXCLUIR = """
+=========== MENU DE EXCLUSÃO ==========
+1. EXCLUIR ALUNO
+2. EXCLUIR LIVRO
+0. VOLTAR AO MENU PRINCIPAL
+=======================================
+"""
 
-def clear_console(wait_time:int=3):
-    '''
-       Esse método limpa a tela após alguns segundos
-       wait_time: argumento de entrada que indica o tempo de espera
-    '''
-    import os
+MENU_RELATORIOS = """
+=========== MENU DE RELATÓRIOS ===========
+1 - RELATÓRIO DE EMPRÉSTIMOS DETALHADOS
+2 - RELATÓRIO DE TOTAL DE EMPRÉSTIMOS POR LIVROS
+0 - VOLTAR AO MENU PRINCIPAL
+=========================================
+"""
+
+# Template para contagem de registros por tabela
+QUERY_COUNT = "select count(1) as total_{tabela} from {tabela}"
+
+# Função para limpar a tela do console
+def limpar_tela(wait_time=3):
     from time import sleep
+    import os
     sleep(wait_time)
-    os.system("clear")
+    os.system('cls' if os.name == 'nt' else 'clear')
