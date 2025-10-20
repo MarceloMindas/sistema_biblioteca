@@ -4,8 +4,9 @@ VALUES
 ("Marcelo Mindas", "180.081.097-00", "27 99659-2133", "mindasmarcelo@gmail.com"),
 ("Ester Bertolani",'563.57.963-04', "27 99456-3694", "bertolaniester@hotmail.com"),
 ("Vanderson Almeia", '122.353.654-78', '27 99886-0906' , 'almeidavanderson@gmail.com'), 
-("Alexsander Amorim", '454.231.567-66', '27 99688-5261', 'amorimalexsander@gmail.com');
-
+("Alexsander Amorim", '454.231.567-66', '27 99688-5261', 'amorimalexsander@gmail.com'),
+("João Poubel", '432.213.879-00', '27 98845-3132', 'poubeljoão@gmail.com');
+ 
 -- Inserir livros
 INSERT INTO Livro (titulo, autor, editora, categoria, quantidade)
 VALUES
