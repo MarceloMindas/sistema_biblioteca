@@ -14,6 +14,7 @@ VALUES
 ('O Cortiço', 'Aluísio Azevedo', 'Saraiva', 'Realismo', 2),
 ('Capitães da Areia', 'Jorge Amado', 'Companhia das Letras', 'Romance', 2);
 
+
 -- Inserir empréstimos
 INSERT INTO emprestimo (id_leitor, id_livro, data_emprestimo, data_devolucao_prevista, data_devolucao_realizada)
 VALUES
