@@ -14,17 +14,17 @@ class ControllerLeitor:
 
             if not self.existe_leitor(mysql, cpf):
                 nome = input("Digite o nome do leitor: ")
-                email = input("Digite o email do leitor: ")
                 telefone = input("Digite o telefone do leitor: ")
+                email = input("Digite o email do leitor: ")
 
                 mysql.execute_dml(
                     f"""
-                    INSERT INTO leitor (nome, cpf, email, telefone)
-                    VALUES ('{nome}', '{cpf}', '{email}', '{telefone}');
+                    INSERT INTO leitor (nome, cpf, telefone, email)
+                    VALUES ('{nome}', '{cpf}', '{telefone}', '{email}');
                     """
                 )
 
-                novo_leitor = Leitor(None, nome, cpf, email, telefone)
+                novo_leitor = Leitor(None, nome, cpf, telefone, email)
                 print("Leitor cadastrado com sucesso!")
                 print(novo_leitor.to_string())
                 return novo_leitor
@@ -45,18 +45,19 @@ class ControllerLeitor:
 
             if self.existe_leitor(mysql, cpf):
                 nome = input("Novo nome: ")
-                email = input("Novo email: ")
                 telefone = input("Novo telefone: ")
+                email = input("Novo email: ")
+                
 
                 mysql.execute_dml(
                     f"""
                     UPDATE leitor 
-                    SET nome = '{nome}', email = '{email}', telefone = '{telefone}'
+                    SET nome = '{nome}', telefone = '{telefone}', email = '{email}'
                     WHERE cpf = '{cpf}';
                     """
                 )
 
-                leitor_atualizado = Leitor(None, nome, cpf, email, telefone)
+                leitor_atualizado = Leitor(None, nome, cpf, telefone, email)
                 print("Leitor atualizado com sucesso!")
                 print(leitor_atualizado.to_string())
                 return leitor_atualizado

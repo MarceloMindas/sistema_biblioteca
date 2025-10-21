@@ -21,7 +21,7 @@ class ControllerLivro:
                 VALUES ('{titulo}', '{autor}', '{editora}', '{categoria}', {quantidade});
             """
             mysql.execute_dml(query)
-            print("✅ Livro cadastrado com sucesso.")
+            print("Livro cadastrado com sucesso.")
             return Livro(None, titulo, autor, editora, categoria, quantidade)
         finally:
             mysql.close()
@@ -45,7 +45,7 @@ class ControllerLivro:
                 WHERE id_livro = {id_livro};
             """
             mysql.execute_dml(query)
-            print("✅ Livro atualizado com sucesso.")
+            print("Livro atualizado com sucesso.")
             return Livro(id_livro, titulo, autor, editora, categoria, quantidade)
         finally:
             mysql.close()
@@ -58,6 +58,6 @@ class ControllerLivro:
             id_livro = input("Digite o ID do livro a ser excluído: ")
             query = f"DELETE FROM livro WHERE id_livro = {id_livro};"
             mysql.execute_dml(query)
-            print("✅ Livro excluído com sucesso.")
+            print("Livro excluído com sucesso.")
         finally:
             mysql.close()

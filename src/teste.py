@@ -90,13 +90,11 @@ def menu_emprestimo():
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
-            ctrl.cadastrar_emprestimo()
+            ctrl.registrar_emprestimo()
         elif opcao == "2":
-            ctrl.atualizar_emprestimo()
+            ctrl.devolver_livro()
         elif opcao == "3":
             ctrl.excluir_emprestimo()
-        elif opcao == "4":
-            ctrl.listar_emprestimos()
         elif opcao == "0":
             break
         else:
