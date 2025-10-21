@@ -28,7 +28,7 @@ def menu_principal():
             print("Encerrando o sistema...")
             break
         else:
-            print("⚠️ Opção inválida. Tente novamente.")
+            print("Opção inválida. Tente novamente.")
 
 
 # ------------------------------------------------------------------
@@ -52,7 +52,7 @@ def menu_leitor():
         elif opcao == "0":
             break
         else:
-            print("⚠️ Opção inválida.")
+            print("Opção inválida.")
 
 
 # ------------------------------------------------------------------
@@ -76,7 +76,7 @@ def menu_livro():
         elif opcao == "0":
             break
         else:
-            print("⚠️ Opção inválida.")
+            print("Opção inválida.")
 
 
 # ------------------------------------------------------------------
@@ -100,7 +100,7 @@ def menu_emprestimo():
         elif opcao == "0":
             break
         else:
-            print("⚠️ Opção inválida.")
+            print("Opção inválida.")
 
 
 # ------------------------------------------------------------------
@@ -121,7 +121,7 @@ def menu_relatorios():
         elif opcao == "0":
             break
         else:
-            print("⚠️ Opção inválida.")
+            print("Opção inválida.")
 
 
 # ------------------------------------------------------------------
