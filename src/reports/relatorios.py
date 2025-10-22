@@ -14,7 +14,7 @@ class Relatorios:
         mysql = MySQLQueries()
         mysql.connect()
 
-        print("\n📘 RELATÓRIO DE EMPRÉSTIMOS DETALHADOS\n")
+        print("\nRELATÓRIO DE EMPRÉSTIMOS DETALHADOS\n")
         resultado = mysql.fetch(self.query_relatorio_emprestimos)
 
         if len(resultado) == 0:
@@ -34,7 +34,7 @@ class Relatorios:
         mysql = MySQLQueries()
         mysql.connect()
 
-        print("\n📗 RELATÓRIO DE TOTAL DE EMPRÉSTIMOS POR LIVRO\n")
+        print("\nRELATÓRIO DE TOTAL DE EMPRÉSTIMOS POR LIVRO\n")
         resultado = mysql.fetch(self.query_relatorio_livros)
 
         if len(resultado) == 0:
