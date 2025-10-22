@@ -1,11 +1,11 @@
 from utils import config
-#rom utils.splash_screen import SplashScreen
+from utils.splash_screen import SplashScreen
 from reports.relatorios import Relatorios
 from controller.controller_leitor import ControllerLeitor
 from controller.controller_livro import ControllerLivro
 from controller.controller_emprestimo import ControllerEmprestimo
 
-#tela_inicial = SplashScreen()
+tela_inicial = SplashScreen()
 relatorio = Relatorios()
 ctrl_leitor = ControllerLeitor()
 ctrl_livro = ControllerLivro()
@@ -84,7 +84,7 @@ def delete(opcaoDelete: int):
 
 
 def run():
-    #print(tela_inicial.get_updated_screen())
+    print(tela_inicial.get_updated_screen())
     config.clear_console(3)
 
     while True:
@@ -130,6 +130,8 @@ def run():
                 continue
 
         input("Pressione Enter para continuar...")
+        print(tela_inicial.get_updated_screen())
+
         config.clear_console()
 
 
