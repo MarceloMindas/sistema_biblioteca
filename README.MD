@@ -75,15 +75,15 @@ O sistema implementa:
 
    Dependências listadas em:
 
-      ```
+
       src/requirements.txt
-      ```
+   
    
    Instale as dependências com:
 
-      ```
+
       pip install -r src/requirements.txt
-      ```
+
 
 
 ## Execução do Projeto no Linux
