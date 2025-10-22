@@ -5,14 +5,14 @@ USE sistema_biblioteca;
 CREATE TABLE Leitor (
     id_leitor INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
-    cpf VARCHAR(16) NOT NULL,
-    telefone VARCHAR(20) NOT NULL,
+    cpf VARCHAR(14) NOT NULL, 
+    telefone VARCHAR(18) NOT NULL, 
     email VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE Livro (
     id_livro INT PRIMARY KEY AUTO_INCREMENT,
-    titulo VARCHAR(30) NOT NULL,
+    titulo VARCHAR(50) NOT NULL,
     autor VARCHAR(100) NOT NULL,
     editora VARCHAR(30) NOT NULL,
     categoria VARCHAR(30) NOT NULL,
