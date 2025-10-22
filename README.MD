@@ -22,10 +22,10 @@ O sistema foi desenvolvido em **Python**, com integração ao **banco de dados M
 O sistema implementa:
 
    * **CRUD completo** (Create, Read, Update, Delete) para:
+      * *Leitores*
+      * *Livros*
+      * *Empréstimos*
 
-   * **Leitores**
-   * **Livros**
-   * **Empréstimos**
    * **Relatórios automatizados**, como:
       1. **Relatório de empréstimos detalhados (JOIN entre tabelas)**
       2. **Relatório de livros mais emprestados (GROUP BY)**
@@ -68,89 +68,76 @@ O sistema implementa:
 
    #### Software Necessário:
 
-      * **Python 3.10+** instalado no sistema
-      * **MySQL Server** configurado e rodando localmente
-      * **VS Code**
-      * Dependências listadas em:
-      ```bash
+   * **Python 3.10+** instalado no sistema
+   * **MySQL Server** configurado e rodando localmente
+   * **VS Code**
+
+   * Dependências listadas em:
+
       src/requirements.txt
-      ```
    
+   * Instale as dependências com:
 
-      * Instale as dependências com:
-
-         ```bash
-         pip install -r src/requirements.txt
-         ```
+      pip install -r src/requirements.txt
 
 
 ## Execução do Projeto no Linux
 
    ##### 1. Clonar o repositório
 
-      ```bash
       git clone https://github.com/MarceloMindas/sistema_biblioteca.git
       cd sistema_biblioteca
-      ```
 
    ##### 2. Criar e ativar ambiente virtual
 
-      ```bash
       python3 -m venv venv
       source venv/bin/activate
-      ```
+
 
    ##### 3. Instalar dependências
 
-      ```bash
       pip install -r src/requirements.txt
-      ```
+
 
    ##### 4. Configurar autenticação com o MySQL
 
-      * Edite o arquivo:
+   * Edite o arquivo:
+        
+      nano src/conexion/passphrase/authentication.mysql
 
-         ```bash
-         nano src/conexion/passphrase/authentication.mysql
-         ```
 
-      * Adicione suas credenciais no formato:
+   * Adicione suas credenciais no formato:
 
       <usuario>,<senha>
 
-         * Exemplo:
+   > Exemplo:
 
-         root,minhasenha123
+      root,minhasenha123
 
 
    ##### 5. Criar tabelas e inserir dados iniciais
 
-      ```bash
       python3 src/create_tables_and_records.py
-      ```
+
 
    ##### 6. Executar o sistema principal
 
-      ```bash
       python3 src/principal.py
-      ```
+
 
    O menu principal será exibido no terminal:
 
-      ```
       === MENU PRINCIPAL ===
       1 - Relatórios
       2 - Inserir Registros
       3 - Atualizar Registros
       4 - Remover Registros
       0 - Sair
-      ```
+
 
    ##### 7. Encerrar o ambiente virtual
 
-      ```bash
       deactivate
-      ```
 
 
 ## Relatórios Implementados
@@ -190,6 +177,5 @@ O sistema implementa:
 
    > Execute novamente:
 
-      ```bash
       python3 src/create_tables_and_records.py
-      ```
+
