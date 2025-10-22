@@ -1,54 +1,76 @@
-from conexion.oracle_queries import OracleQueries
+from conexion.mysql_queries import MySQLQueries
 
-def create_tables(query:str):
+def create_tables(query: str):
+    """
+    Cria as tabelas no banco de dados MySQL a partir de um arquivo SQL.
+    """
     list_of_commands = query.split(";")
 
-    oracle = OracleQueries(can_write=True)
-    oracle.connect()
+    mysql = MySQLQueries(can_write=True)
+    mysql.connect()
 
-    for command in list_of_commands:    
+    for command in list_of_commands:
+        command = command.strip()
         if len(command) > 0:
-            print(command)
+            print(f"\nExecutando comando:\n{command}")
             try:
-                oracle.executeDDL(command)
-                print("Successfully executed")
+                mysql.executeDDL(command)
+                print("Comando executado com sucesso.")
             except Exception as e:
-                print(e)            
+                print(f"Erro ao executar: {e}")
 
-def generate_records(query:str, sep:str=';'):
+def generate_records(query: str, sep: str = ';'):
+    """
+    Insere registros de exemplo no banco de dados MySQL.
+    """
     list_of_commands = query.split(sep)
 
-    oracle = OracleQueries(can_write=True)
-    oracle.connect()
+    mysql = MySQLQueries(can_write=True)
+    mysql.connect()
 
-    for command in list_of_commands:    
+    for command in list_of_commands:
+        command = command.strip()
         if len(command) > 0:
-            print(command)
-            oracle.write(command)
-            print("Successfully executed")
+            print(f"\nInserindo registro:\n{command}")
+            try:
+                mysql.write(command)
+                print("Registro inserido com sucesso.")
+            except Exception as e:
+                print(f"Erro ao inserir: {e}")
 
 def run():
+    """
+    Executa todo o processo de configuração:
+    - Cria as tabelas
+    - Insere os dados de exemplo
+    - Insere dados relacionados (se existirem)
+    """
 
-    with open("../sql/create_tables_pedidos.sql") as f:
+    # Caminho relativo para os scripts SQL
+    with open("src/sql/create_tables_biblioteca.sql", encoding="utf-8") as f:
         query_create = f.read()
 
-    print("Creating tables...")
+    print("\nCriando tabelas...")
     create_tables(query=query_create)
-    print("Tables successfully created!")
+    print("Tabelas criadas com sucesso!\n")
 
-    with open("../sql/inserting_samples_records.sql") as f:
+    with open("src/sql/inserting_sample_records.sql", encoding="utf-8") as f:
         query_generate_records = f.read()
 
-    print("Gerenating records")
+    print("\n📥 Inserindo registros de exemplo...")
     generate_records(query=query_generate_records)
-    print("Records successfully generated!")
+    print("Registros inseridos com sucesso!\n")
 
-    with open("../sql/inserting_samples_related_records.sql") as f:
-        query_generate_related_records = f.read()
+    # Se tiver dados com dependências (tipo empréstimos com FK)
+    try:
+        with open("src/sql/inserting_related_records.sql", encoding="utf-8") as f:
+            query_generate_related_records = f.read()
 
-    print("Gerenating records")
-    generate_records(query=query_generate_related_records, sep='--')
-    print("Records successfully generated!")
+        print("\nInserindo registros relacionados...")
+        generate_records(query=query_generate_related_records, sep='--')
+        print("Registros relacionados inseridos com sucesso!\n")
+    except FileNotFoundError:
+        print("Nenhum arquivo de registros relacionados encontrado, continuando...\n")
 
 if __name__ == '__main__':
     run()

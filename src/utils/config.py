@@ -25,7 +25,7 @@ MENU_ENTIDADES = """
 QUERY_COUNT = 'select count(1) as total_{tabela} from {tabela}'
 
 
-def clear_console(wait_time: int = 3):
+def clear_console(wait_time: int = 2):
     '''
     Limpa a tela após alguns segundos.
     '''
