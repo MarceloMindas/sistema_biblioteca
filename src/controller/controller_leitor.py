@@ -79,11 +79,11 @@ class ControllerLeitor:
                 mysql.execute_dml(
                     f"DELETE FROM leitor WHERE cpf = '{cpf}';"
                 )
-                print("🗑️ Leitor excluído com sucesso.")
+                print("Leitor excluído com sucesso.")
             else:
-                print("⚠️ Leitor não encontrado.")
+                print("Leitor não encontrado.")
         except Exception as e:
-            print(f"❌ Erro ao excluir leitor: {e}")
+            print(f"Erro ao excluir leitor: {e}")
         finally:
             mysql.close()
 

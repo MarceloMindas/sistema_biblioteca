@@ -27,7 +27,7 @@ class ControllerEmprestimo:
                 );
             """
             mysql.execute_dml(query)
-            print("✅ Empréstimo registrado com sucesso.")
+            print("Empréstimo registrado com sucesso.")
 
             # Cria objeto para representar o empréstimo no sistema
             emprestimo = Emprestimo(
@@ -42,7 +42,7 @@ class ControllerEmprestimo:
             return emprestimo
 
         except Exception as e:
-            print(f"❌ Erro ao registrar empréstimo: {e}")
+            print(f"Erro ao registrar empréstimo: {e}")
         finally:
             mysql.close()
 
@@ -61,9 +61,9 @@ class ControllerEmprestimo:
                 WHERE id_emprestimo = {id_emprestimo};
             """
             mysql.execute_dml(query)
-            print("✅ Devolução registrada com sucesso.")
+            print("Devolução registrada com sucesso.")
         except Exception as e:
-            print(f"❌ Erro ao registrar devolução: {e}")
+            print(f"Erro ao registrar devolução: {e}")
         finally:
             mysql.close()
 
@@ -77,8 +77,8 @@ class ControllerEmprestimo:
 
             query = f"DELETE FROM emprestimo WHERE id_emprestimo = {id_emprestimo};"
             mysql.execute_dml(query)
-            print("🗑️ Empréstimo excluído com sucesso.")
+            print("Empréstimo excluído com sucesso.")
         except Exception as e:
-            print(f"❌ Erro ao excluir empréstimo: {e}")
+            print(f"Erro ao excluir empréstimo: {e}")
         finally:
             mysql.close()

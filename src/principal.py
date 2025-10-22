@@ -1,129 +1,137 @@
+from utils import config
+from utils.splash_screen import SplashScreen
 from reports.relatorios import Relatorios
 from controller.controller_leitor import ControllerLeitor
 from controller.controller_livro import ControllerLivro
 from controller.controller_emprestimo import ControllerEmprestimo
 
+# tela_inicial = SplashScreen()
+relatorio = Relatorios()
+ctrl_leitor = ControllerLeitor()
+ctrl_livro = ControllerLivro()
+ctrl_emprestimo = ControllerEmprestimo()
 
-
-def menu_principal():
+def pedir_opcao(menu_text: str) -> int:
+    """vai mostrar o tipo de menu que passar por parâmetro e pedir a opção dele (tratamento de erro)"""
     while True:
-        print("\n=== MENU PRINCIPAL ===")
-        print("1 - Gerenciar Leitores")
-        print("2 - Gerenciar Livros")
-        print("3 - Gerenciar Empréstimos")
-        print("4 - Relatórios")
-        print("0 - Sair")
-
-        opcao = input("Escolha uma opção: ")
-
-        if opcao == "1":
-            menu_leitor()
-        elif opcao == "2":
-            menu_livro()
-        elif opcao == "3":
-            menu_emprestimo()
-        elif opcao == "4":
-            menu_relatorios()
-        elif opcao == "0":
-            print("Encerrando o sistema...")
-            break
-        else:
-            print("⚠️ Opção inválida. Tente novamente.")
+        print(menu_text)
+        try:
+            return int(input("Escolha uma opção: "))
+        except ValueError:
+            print("Digite um número válido.")
+            continue
 
 
-# ------------------------------------------------------------------
-def menu_leitor():
-    ctrl = ControllerLeitor()
+def reports(opcaoRelatorio: int):
+    match opcaoRelatorio:
+        case 1:
+            relatorio.get_relatorio_emprestimos()
+
+        case 2:
+            relatorio.get_relatorio_livros()
+
+        case _:
+            print("Inválido. Tente novamente.")
+            return
+
+
+def insert(opcaoInsert: int):
+    match opcaoInsert:
+        case 1:
+            ctrl_leitor.cadastrar_leitor()
+
+        case 2:
+            ctrl_livro.cadastrar_livro()
+
+        case 3:
+            ctrl_emprestimo.registrar_emprestimo()
+
+        case _:
+            print("Inválido. Tente novamente.")
+            return
+
+
+def update(opcaoUpdate: int):
+    match opcaoUpdate:
+        case 1:
+            ctrl_leitor.atualizar_leitor()
+
+        case 2:
+            ctrl_livro.atualizar_livro()
+
+        case 3:
+            ctrl_emprestimo.devolver_livro()
+
+        case _:
+            print("Inválido. Tente novamente.")
+            return
+
+
+def delete(opcaoDelete: int):
+    match opcaoDelete:
+        case 1:
+            ctrl_leitor.excluir_leitor()
+
+        case 2:
+            ctrl_livro.excluir_livro()
+
+        case 3:
+            ctrl_emprestimo.excluir_emprestimo()
+
+        case _:
+            print("Inválido. Tente novamente.")
+            return
+
+
+def run():
+    # print(tela_inicial.get_updated_screen())
+    config.clear_console(3)
+
     while True:
-        print("\n=== MENU LEITOR ===")
-        print("1 - Cadastrar leitor")
-        print("2 - Atualizar leitor")
-        print("3 - Excluir leitor")
-        print("0 - Voltar")
+        print(config.MENU_PRINCIPAL)
+        try:
+            opcao = int(input("Escolha uma opção: "))
 
-        opcao = input("Escolha uma opção: ")
+        except ValueError:
+            print("Digite um número válido.")
+            continue
 
-        if opcao == "1":
-            ctrl.cadastrar_leitor()
-        elif opcao == "2":
-            ctrl.atualizar_leitor()
-        elif opcao == "3":
-            ctrl.excluir_leitor()
-        elif opcao == "0":
-            break
-        else:
-            print("⚠️ Opção inválida.")
+        match opcao:
+            case 1:
+                opRelatorios = pedir_opcao(config.MENU_RELATORIOS)
+                if opRelatorios == 0:
+                    continue
+                reports(opRelatorios)
 
+            case 2:
+                opInsert = pedir_opcao(config.MENU_ENTIDADES)
+                if opInsert == 0:
+                    continue
+                insert(opInsert)
 
-# ------------------------------------------------------------------
-def menu_livro():
-    ctrl = ControllerLivro()
-    while True:
-        print("\n=== MENU LIVRO ===")
-        print("1 - Cadastrar livro")
-        print("2 - Atualizar livro")
-        print("3 - Excluir livro")
-        print("0 - Voltar")
+            case 3:
+                opUpdate = pedir_opcao(config.MENU_ENTIDADES)
+                if opUpdate == 0:
+                    continue
+                update(opUpdate)
 
-        opcao = input("Escolha uma opção: ")
+            case 4:
+                opDelete = pedir_opcao(config.MENU_ENTIDADES)
+                if opDelete == 0:
+                    continue
+                delete(opDelete)
 
-        if opcao == "1":
-            ctrl.cadastrar_livro()
-        elif opcao == "2":
-            ctrl.atualizar_livro()
-        elif opcao == "3":
-            ctrl.excluir_livro()
-        elif opcao == "0":
-            break
-        else:
-            print("⚠️ Opção inválida.")
+            case 0:
+                print("Saindo...")
+                break
 
+            case _:
+                print("Inválido. Tente novamente.")
+                continue
 
-# ------------------------------------------------------------------
-def menu_emprestimo():
-    ctrl = ControllerEmprestimo()
-    while True:
-        print("\n=== MENU EMPRÉSTIMO ===")
-        print("1 - Registrar empréstimo")
-        print("2 - Devolver livro")
-        print("3 - Excluir empréstimo")
-        print("0 - Voltar")
-
-        opcao = input("Escolha uma opção: ")
-
-        if opcao == "1":
-            ctrl.registrar_emprestimo()
-        elif opcao == "2":
-            ctrl.devolver_livro()
-        elif opcao == "3":
-            ctrl.excluir_emprestimo()
-        elif opcao == "0":
-            break
-        else:
-            print("⚠️ Opção inválida.")
+        input("Pressione Enter para continuar...")
+        config.clear_console()
 
 
-# ------------------------------------------------------------------
-def menu_relatorios():
-    rel = Relatorios()
-    while True:
-        print("\n=== MENU RELATÓRIOS ===")
-        print("1 - Relatório de Empréstimos")
-        print("2 - Relatório de Livros Mais Emprestados")
-        print("0 - Voltar")
-
-        opcao = input("Escolha uma opção: ")
-
-        if opcao == "1":
-            rel.get_relatorio_emprestimos()
-        elif opcao == "2":
-            rel.get_relatorio_livros()
-        elif opcao == "0":
-            break
-        else:
-            print("⚠️ Opção inválida.")
-
-
-# ------------------------------------------------------------------
 if __name__ == "__main__":
-    menu_principal()
+    run()
