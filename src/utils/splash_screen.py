@@ -5,7 +5,6 @@ from utils import config
 class SplashScreen:
 
     def __init__(self):
-        # Corrigido: o nome do método é __init__, não _init_
         self.qry_total_leitores = config.QUERY_COUNT.format(tabela="leitor")
         self.qry_total_livros = config.QUERY_COUNT.format(tabela="livro")
         self.qry_total_emprestimos = config.QUERY_COUNT.format(tabela="emprestimo")
@@ -52,7 +51,7 @@ class SplashScreen:
 """
 
     def show(self):
-        """Exibe a splash screen e aguarda alguns segundos."""
+
         from utils.config import clear_console
         print(self.get_updated_screen())
         clear_console(4)

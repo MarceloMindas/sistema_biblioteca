@@ -1,6 +1,5 @@
 
 #Classe MySQLQueries — adaptada do modelo OracleQueries (Prof. Howard Roatti)
-
 import mysql.connector
 
 class MySQLQueries:
@@ -16,7 +15,7 @@ class MySQLQueries:
         # Lê o arquivo de autenticação contendo user e password.
         # O arquivo deve estar em: src/conexion/passphrase/authentication.mysql
         # Formato esperado: user,senha  (sem espaços)
-        with open("conexion/passphrase/authentication.mysql", "r") as f:
+        with open("src/conexion/passphrase/authentication.mysql", "r") as f:
             self.user, self.password = f.read().strip().split(",")
 
         self.conn = None
