@@ -1,0 +1,28 @@
+
+erDiagram
+    LIVRO {
+        id_livro INT PK "NOT NULL"
+        titulo VARCHAR(50) "NOT NULL"
+        autor VARCHAR(100) "NOT NULL"
+        editora VARCHAR(30) "NOT NULL"
+        categoria VARCHAR(30) "NOT NULL"
+        quantidade INT  "NOT NULL"
+    }
+    LEITOR {
+        id_leitor INT PK "NOT NULL"
+        nome VARCHAR(50) "NOT NULL"
+        cpf VARCHAR(14) "NOT NULL" 
+        telefone VARCHAR(18) "NOT NULL" 
+        email VARCHAR(100) "NOT NULL"
+    }
+    EMPRESTIMO {
+        id_emprestimo INT PK "NOT NULL"
+        id_leitor INT FK "NOT NULL"
+        id_livro INT FK "NOT NULL" 
+        data_emprestimo DATE "NOT NULL"
+        data_devolucao_prevista DATE "NOT NULL"
+        data_devolucao_realizada DATE "NOT NULL"
+    }
+
+    LIVRO ||--|{ EMPRESTIMO : "empresta"
+    LEITOR }|--|| EMPRESTIMO : "realiza"
