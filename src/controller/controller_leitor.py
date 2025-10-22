@@ -19,7 +19,7 @@ class ControllerLeitor:
 
                 mysql.execute_dml(
                     f"""
-                    INSERT INTO leitor (nome, cpf, telefone, email)
+                       INSERT INTO leitor (nome, cpf, telefone, email)
                     VALUES ('{nome}', '{cpf}', '{telefone}', '{email}');
                     """
                 )

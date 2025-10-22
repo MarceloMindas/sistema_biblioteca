@@ -1,5 +1,5 @@
 -- Inserir leitores
-INSERT INTO leitor (nome, cpf, telefone, email)
+INSERT INTO Leitor (nome, cpf, telefone, email)
 VALUES
 ("Marcelo Mindas", "180.081.097-00", "27 99659-2133", "mindasmarcelo@gmail.com"),
 ("Ester Bertolani",'563.57.963-04', "27 99456-3694", "bertolaniester@hotmail.com"),
@@ -16,13 +16,13 @@ VALUES
 
 
 -- Inserir empréstimos
-INSERT INTO emprestimo (id_leitor, id_livro, data_emprestimo, data_devolucao_prevista, data_devolucao_realizada)
+INSERT INTO Emprestimo (id_leitor, id_livro, data_emprestimo, data_devolucao_prevista, data_devolucao_realizada)
 VALUES
 (1, 1, '2025-10-15', '2025-10-25', '2025-10-25'),
 (2, 3, '2025-10-15', '2025-10-25', '2025-10-25'),
 (3, 2, '2025-10-15', '2025-10-25', '2025-10-25');
 
-SELECT * FROM emprestimo;
+SELECT * FROM Emprestimo;
 
 
 
