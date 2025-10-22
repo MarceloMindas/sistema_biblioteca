@@ -1,6 +1,6 @@
 # Sistema de Gerenciamento de Biblioteca Escolar - Python integrado com MySQL
 
-#### Informações:
+### Informações:
 
 **Integrantes:** Alexsander Borchardt, Ester Bertolani, João Paulo Poubel, Marcelo Mindas, Vanderson de Almeida
 
@@ -27,8 +27,8 @@ O sistema implementa:
       * *Empréstimos*
 
    * **Relatórios automatizados**, como:
-      1. **Relatório de empréstimos detalhados (JOIN entre tabelas)**
-      2. **Relatório de livros mais emprestados (GROUP BY)**
+      1. *Relatório de empréstimos detalhados (JOIN entre tabelas)*
+      2. *Relatório de livros mais emprestados (GROUP BY)*
 
 ## Estrutura do Projeto_
 
@@ -66,61 +66,67 @@ O sistema implementa:
 
 ## Requisitos do Ambiente
 
-   #### Software Necessário:
+   ### Software Necessário:
 
    * **Python 3.10+** instalado no sistema
    * **MySQL Server** configurado e rodando localmente
    * **VS Code**
 
-   * Dependências listadas em:
 
+   Dependências listadas em:
+
+      ```
       src/requirements.txt
+      ```
    
-   * Instale as dependências com:
+   Instale as dependências com:
 
+      ```
       pip install -r src/requirements.txt
+      ```
 
 
 ## Execução do Projeto no Linux
 
-   ##### 1. Clonar o repositório
+   #### 1. Clonar o repositório
 
       git clone https://github.com/MarceloMindas/sistema_biblioteca.git
       cd sistema_biblioteca
 
-   ##### 2. Criar e ativar ambiente virtual
+   #### 2. Criar e ativar ambiente virtual
 
       python3 -m venv venv
       source venv/bin/activate
 
 
-   ##### 3. Instalar dependências
+   #### 3. Instalar dependências
 
       pip install -r src/requirements.txt
 
 
-   ##### 4. Configurar autenticação com o MySQL
+   #### 4. Configurar autenticação com o MySQL
 
    * Edite o arquivo:
-        
+      ```  
       nano src/conexion/passphrase/authentication.mysql
-
+      ```
 
    * Adicione suas credenciais no formato:
-
-      <usuario>,<senha>
-
+      ```
+      usuario,senha
+      ```
+   
    > Exemplo:
 
       root,minhasenha123
 
 
-   ##### 5. Criar tabelas e inserir dados iniciais
+   #### 5. Criar tabelas e inserir dados iniciais
 
       python3 src/create_tables_and_records.py
 
 
-   ##### 6. Executar o sistema principal
+   #### 6. Executar o sistema principal
 
       python3 src/principal.py
 
@@ -135,7 +141,7 @@ O sistema implementa:
       0 - Sair
 
 
-   ##### 7. Encerrar o ambiente virtual
+   #### 7. Encerrar o ambiente virtual
 
       deactivate
 
