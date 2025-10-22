@@ -1,13 +1,13 @@
 # Sistema de Gerenciamento de Biblioteca Escolar - Python integrado com MySQL
 
 #### Informações:
-```
-###### Integrantes: Alexsander Borchardt, Ester Bertolani, João Paulo Poubel, Marcelo Mindas, Vanderson de Almeida
-**Disciplina:** Banco de Dados
-**Professor:** Howard Roatti Cruz
-**Turma:** 4HC1A
-**Vídeo de apresentação:** ___
-```
+
+*Integrantes:* Alexsander Borchardt, Ester Bertolani, João Paulo Poubel, Marcelo Mindas, Vanderson de Almeida
+*Disciplina:* Banco de Dados
+*Professor:* Howard Roatti Cruz
+*Turma:* 4HC1A
+*Vídeo de apresentação:* ___
+
 ## Descrição do Projeto
 
 O **Sistema de Biblioteca** tem como objetivo gerenciar o cadastro de leitores, livros e empréstimos, permitindo o controle completo das operações de uma biblioteca acadêmica.
@@ -22,9 +22,8 @@ O sistema implementa:
    * **Livros**
    * **Empréstimos**
    * **Relatórios automatizados**, como:
-
-   1. **Relatório de empréstimos detalhados (JOIN entre tabelas)**
-   2. **Relatório de livros mais emprestados (GROUP BY)**
+      1. **Relatório de empréstimos detalhados (JOIN entre tabelas)**
+      2. **Relatório de livros mais emprestados (GROUP BY)**
 
 ## Estrutura do Projeto_
 
