@@ -2,11 +2,16 @@
 
 #### Informações:
 
-*Integrantes:* Alexsander Borchardt, Ester Bertolani, João Paulo Poubel, Marcelo Mindas, Vanderson de Almeida
-*Disciplina:* Banco de Dados
-*Professor:* Howard Roatti Cruz
-*Turma:* 4HC1A
-*Vídeo de apresentação:* ___
+**Integrantes:** Alexsander Borchardt, Ester Bertolani, João Paulo Poubel, Marcelo Mindas, Vanderson de Almeida
+
+**Disciplina:** Banco de Dados
+
+**Professor:** Howard Roatti Cruz
+
+**Turma:** 4HC1A
+
+**Vídeo de apresentação:** ___
+
 
 ## Descrição do Projeto
 
@@ -81,27 +86,27 @@ O sistema implementa:
 
 ## Execução do Projeto no Linux
 
-   ###### 1. Clonar o repositório
+   ##### 1. Clonar o repositório
 
       ```bash
       git clone https://github.com/MarceloMindas/sistema_biblioteca.git
       cd sistema_biblioteca
       ```
 
-   ###### 2. Criar e ativar ambiente virtual
+   ##### 2. Criar e ativar ambiente virtual
 
       ```bash
       python3 -m venv venv
       source venv/bin/activate
       ```
 
-   ###### 3. Instalar dependências
+   ##### 3. Instalar dependências
 
       ```bash
       pip install -r src/requirements.txt
       ```
 
-   ###### 4. Configurar autenticação com o MySQL
+   ##### 4. Configurar autenticação com o MySQL
 
       * Edite o arquivo:
 
@@ -118,13 +123,13 @@ O sistema implementa:
          root,minhasenha123
 
 
-   ###### 5. Criar tabelas e inserir dados iniciais
+   ##### 5. Criar tabelas e inserir dados iniciais
 
       ```bash
       python3 src/create_tables_and_records.py
       ```
 
-   ###### 6. Executar o sistema principal
+   ##### 6. Executar o sistema principal
 
       ```bash
       python3 src/principal.py
@@ -141,7 +146,7 @@ O sistema implementa:
       0 - Sair
       ```
 
-   ###### 7. Encerrar o ambiente virtual
+   ##### 7. Encerrar o ambiente virtual
 
       ```bash
       deactivate
