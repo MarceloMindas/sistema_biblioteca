@@ -85,6 +85,7 @@ def delete(opcaoDelete: int):
 
 def run():
     print(tela_inicial.get_updated_screen())
+    print("Iniciando o sistema...")
     config.clear_console(3)
 
     while True:
@@ -100,28 +101,43 @@ def run():
             case 1:
                 opRelatorios = pedir_opcao(config.MENU_RELATORIOS)
                 if opRelatorios == 0:
+                    print(tela_inicial.get_updated_screen())
+                    config.clear_console()
                     continue
                 reports(opRelatorios)
+
 
             case 2:
                 opInsert = pedir_opcao(config.MENU_ENTIDADES)
                 if opInsert == 0:
+                    print(tela_inicial.get_updated_screen())
+                    config.clear_console()
                     continue
                 insert(opInsert)
+
 
             case 3:
                 opUpdate = pedir_opcao(config.MENU_ENTIDADES)
                 if opUpdate == 0:
+                    print(tela_inicial.get_updated_screen())
+                    config.clear_console()
                     continue
                 update(opUpdate)
+                
 
             case 4:
                 opDelete = pedir_opcao(config.MENU_ENTIDADES)
                 if opDelete == 0:
+                    print(tela_inicial.get_updated_screen())
+                    config.clear_console()
                     continue
                 delete(opDelete)
+                
 
             case 0:
+                print(tela_inicial.get_updated_screen())
+                config.clear_console()
+                print(tela_inicial.get_updated_screen())
                 print("Saindo...")
                 break
 
@@ -131,7 +147,6 @@ def run():
 
         input("Pressione Enter para continuar...")
         print(tela_inicial.get_updated_screen())
-
         config.clear_console()
 
 

@@ -33,7 +33,6 @@ class Relatorios:
                     f"Data Empréstimo: {linha[3]} | Devolvido em: {linha[4]}"
                 )
 
-        input("\nPressione Enter para sair do relatório de empréstimos.")
         mysql.close()
 
     # -------------------------------------------------------------------------
@@ -53,5 +52,4 @@ class Relatorios:
             for linha in resultado:
                 print(f"Livro: {linha[0]} | Total de Empréstimos: {linha[1]}")
 
-        input("\nPressione Enter para sair do relatório de livros.")
         mysql.close()
