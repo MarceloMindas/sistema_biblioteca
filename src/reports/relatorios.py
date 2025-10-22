@@ -1,75 +1,57 @@
-from conexion.oracle_queries import OracleQueries
+from conexion.mysql_queries import MySQLQueries
+import os
 
-class Relatorio:
+class Relatorios:
     def __init__(self):
-        # Abre o arquivo com a consulta e associa a um atributo da classe
-        with open("sql/relatorio_pedidos.sql") as f:
-            self.query_relatorio_pedidos = f.read()
+        # Caminho base dinâmico — compatível com Linux e Windows
+        base_path = os.path.join(os.path.dirname(__file__), "..", "sql")
 
-        # Abre o arquivo com a consulta e associa a um atributo da classe
-        with open("sql/relatorio_pedidos_por_fornecedor.sql") as f:
-            self.query_relatorio_pedidos_por_fornecedor = f.read()
+        # Abre os arquivos com as consultas SQL e associa aos atributos da classe
+        with open(os.path.join(base_path, "relatorio_1.sql"), encoding="utf-8") as f:
+            self.query_relatorio_emprestimos = f.read()
 
-        # Abre o arquivo com a consulta e associa a um atributo da classe
-        with open("sql/relatorio_produtos.sql") as f:
-            self.query_relatorio_produtos = f.read()
+        with open(os.path.join(base_path, "relatorio_2.sql"), encoding="utf-8") as f:
+            self.query_relatorio_livros = f.read()
 
-        # Abre o arquivo com a consulta e associa a um atributo da classe
-        with open("sql/relatorio_clientes.sql") as f:
-            self.query_relatorio_clientes = f.read()
+    # -------------------------------------------------------------------------
+    def get_relatorio_emprestimos(self):
+        """
+        Exibe o relatório de empréstimos detalhados
+        """
+        mysql = MySQLQueries()
+        mysql.connect()
+        
+        print("\n=== RELATÓRIO DE EMPRÉSTIMOS DETALHADOS ===\n")
+        resultado = mysql.fetch(self.query_relatorio_emprestimos)
 
-        # Abre o arquivo com a consulta e associa a um atributo da classe
-        with open("sql/relatorio_fornecedores.sql") as f:
-            self.query_relatorio_fornecedores = f.read()
+        if not resultado:
+            print("Nenhum empréstimo encontrado.")
+        else:
+            for linha in resultado:
+                print(
+                    f"ID: {linha[0]} | Leitor: {linha[1]} | Livro: {linha[2]} | "
+                    f"Data Empréstimo: {linha[3]} | Devolvido em: {linha[4]}"
+                )
 
-        # Abre o arquivo com a consulta e associa a um atributo da classe
-        with open("sql/relatorio_itens_pedidos.sql") as f:
-            self.query_relatorio_itens_pedidos = f.read()
+        input("\nPressione Enter para sair do relatório de empréstimos.")
+        mysql.close()
 
-    def get_relatorio_pedidos(self):
-        # Cria uma nova conexão com o banco que permite alteração
-        oracle = OracleQueries()
-        oracle.connect()
-        # Recupera os dados transformando em um DataFrame
-        print(oracle.sqlToDataFrame(self.query_relatorio_pedidos))
-        input("Pressione Enter para Sair do Relatório de Pedidos")
+    # -------------------------------------------------------------------------
+    def get_relatorio_livros(self):
+        """
+        Exibe o relatório de total de empréstimos por livro
+        """
+        mysql = MySQLQueries()
+        mysql.connect()
 
-    def get_relatorio_pedidos_por_fornecedor(self):
-        # Cria uma nova conexão com o banco que permite alteração
-        oracle = OracleQueries()
-        oracle.connect()
-        # Recupera os dados transformando em um DataFrame
-        print(oracle.sqlToDataFrame(self.query_relatorio_pedidos_por_fornecedor))
-        input("Pressione Enter para Sair do Relatório de Fornecedores")
+        print("\n=== RELATÓRIO DE LIVROS MAIS EMPRESTADOS ===\n")
+        resultado = mysql.fetch(self.query_relatorio_livros)
 
-    def get_relatorio_produtos(self):
-        # Cria uma nova conexão com o banco que permite alteração
-        oracle = OracleQueries()
-        oracle.connect()
-        # Recupera os dados transformando em um DataFrame
-        print(oracle.sqlToDataFrame(self.query_relatorio_produtos))
-        input("Pressione Enter para Sair do Relatório de Produtos")
+        if not resultado:
+            print("Nenhum registro encontrado.")
+        else:
+            for linha in resultado:
+                print(f"Livro: {linha[0]} | Total de Empréstimos: {linha[1]}")
 
-    def get_relatorio_clientes(self):
-        # Cria uma nova conexão com o banco que permite alteração
-        oracle = OracleQueries()
-        oracle.connect()
-        # Recupera os dados transformando em um DataFrame
-        print(oracle.sqlToDataFrame(self.query_relatorio_clientes))
-        input("Pressione Enter para Sair do Relatório de Clientes")
-
-    def get_relatorio_fornecedores(self):
-        # Cria uma nova conexão com o banco que permite alteração
-        oracle = OracleQueries()
-        oracle.connect()
-        # Recupera os dados transformando em um DataFrame
-        print(oracle.sqlToDataFrame(self.query_relatorio_fornecedores))
-        input("Pressione Enter para Sair do Relatório de Fornecedores")
-
-    def get_relatorio_itens_pedidos(self):
-        # Cria uma nova conexão com o banco que permite alteração
-        oracle = OracleQueries()
-        oracle.connect()
-        # Recupera os dados transformando em um DataFrame
-        print(oracle.sqlToDataFrame(self.query_relatorio_itens_pedidos))
-        input("Pressione Enter para Sair do Relatório de Itens de Pedidos")
+        input("\nPressione Enter para sair do relatório de livros.")
+        mysql.close()
