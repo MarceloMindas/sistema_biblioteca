@@ -1,52 +1,191 @@
-# Sistema de gerenciamento de Biblioteca escolar em Python fazendo CRUD no MySQL
+# Sistema de Gerenciamento de Biblioteca Escolar - Python integrado com MySQL
 
-Esse sistema é composto por um conjunto de tabelas que representam empréstimos de livros escolares, contendo tabelas como: alunos, livros e empréstimos.
+#### Informações:
+```
+###### Integrantes: Alexsander Borchardt, Ester Bertolani, João Paulo Poubel, Marcelo Mindas, Vanderson de Almeida
+**Disciplina:** Banco de Dados
+**Professor:** Howard Roatti Cruz
+**Turma:** 4HC1A
+**Vídeo de apresentação:** ___
+```
+## Descrição do Projeto
 
-## Estrutura do Projeto
+O **Sistema de Biblioteca** tem como objetivo gerenciar o cadastro de leitores, livros e empréstimos, permitindo o controle completo das operações de uma biblioteca acadêmica.
 
- ```
- sistema_biblioteca/
- ├── src/
- │   ├── conexion/
- │   │   ├── passphrase
- │   │   |   └── authentication.mysql
- │   │   └── __init__.py
- │   ├── controller
- │   │   ├── __init__.py
- │   │   ├── controller_emprestimo.py
- │   │   ├── controller_leitor.py
- │   │   └── controller_livro.py
- │   ├── model
- │   │   ├── __init__.py
- │   │   ├── emprestimo.py
- │   │   ├── leitor.py
- │   │   └── livro.py
- │   ├── reports
- │   │   ├── __init__.py
- │   │   └── relatorios.py
- │   ├── sql
- │   └── utils
- │   │   ├── __init__.py
- │   │   ├── config.py
- │   │   ├── splash_screen.py
- │   │   └── controller_livro.py
- ├── create_tables_and_records.py
- ├── principal.py
- ├── requirements.py
- └── teste.py
- ```
- - [controller](controller):
-    * aaa
+O sistema foi desenvolvido em **Python**, com integração ao **banco de dados MySQL**, simulando um sistema real de CRUD completo com persistência de dados, relatórios e controle de registros.
 
- - [model](model):
+O sistema implementa:
 
- - [reports](reports):
+   * **CRUD completo** (Create, Read, Update, Delete) para:
 
- - [utils](utils):
+   * **Leitores**
+   * **Livros**
+   * **Empréstimos**
+   * **Relatórios automatizados**, como:
 
- - [scr](src):
-  * create_tables_and_records.py
-  * principal.py
-  * requirements.py
-  * teste.py
-  
+   1. **Relatório de empréstimos detalhados (JOIN entre tabelas)**
+   2. **Relatório de livros mais emprestados (GROUP BY)**
+
+## Estrutura do Projeto_
+
+   ```
+   .
+   ├── diagrams/                                   # Diagramas do banco e do sistema
+   ├── src/
+   │   ├── conexion/                               # Conexão com o banco de dados
+   │   │   ├── mysql_queries.py
+   │   │   └── passphrase/
+   │   │       └── authentication.mysql            # Credenciais do MySQL
+   │   ├── controller/                             # Controladores CRUD
+   │   │   ├── controller_leitor.py
+   │   │   ├── controller_livro.py
+   │   │   └── controller_emprestimo.py
+   │   ├── model/                                  # Classes de domínio (OOP)
+   │   │   ├── leitor.py
+   │   │   ├── livro.py
+   │   │   └── emprestimo.py
+   │   ├── reports/                                # Relatórios SQL e exibição
+   │   │   └── relatorios.py
+   │   ├── sql/                                    # Scripts SQL
+   │   │   ├── create_tables_biblioteca.sql
+   │   │   ├── insert_dados.sql
+   │   │   ├── relatorio_1.sql
+   │   │   └── relatorio_2.sql
+   │   ├── utils/                                  # Funções auxiliares
+   │   │   ├── config.py
+   │   │   └── splash_screen.py
+   │   ├── create_tables_and_records.py            # Cria e popula o banco
+   │   ├── principal.py                            # Menu principal da aplicação
+   │   └── requirements.txt                        # Dependências Python
+   └── README.md
+   ```
+
+## Requisitos do Ambiente
+
+   #### Software Necessário:
+
+      * **Python 3.10+** instalado no sistema
+      * **MySQL Server** configurado e rodando localmente
+      * **VS Code**
+      * Dependências listadas em:
+      ```bash
+      src/requirements.txt
+      ```
+   
+
+      * Instale as dependências com:
+
+         ```bash
+         pip install -r src/requirements.txt
+         ```
+
+
+## Execução do Projeto no Linux
+
+   ###### 1. Clonar o repositório
+
+      ```bash
+      git clone https://github.com/MarceloMindas/sistema_biblioteca.git
+      cd sistema_biblioteca
+      ```
+
+   ###### 2. Criar e ativar ambiente virtual
+
+      ```bash
+      python3 -m venv venv
+      source venv/bin/activate
+      ```
+
+   ###### 3. Instalar dependências
+
+      ```bash
+      pip install -r src/requirements.txt
+      ```
+
+   ###### 4. Configurar autenticação com o MySQL
+
+      * Edite o arquivo:
+
+         ```bash
+         nano src/conexion/passphrase/authentication.mysql
+         ```
+
+      * Adicione suas credenciais no formato:
+
+      <usuario>,<senha>
+
+         * Exemplo:
+
+         root,minhasenha123
+
+
+   ###### 5. Criar tabelas e inserir dados iniciais
+
+      ```bash
+      python3 src/create_tables_and_records.py
+      ```
+
+   ###### 6. Executar o sistema principal
+
+      ```bash
+      python3 src/principal.py
+      ```
+
+   O menu principal será exibido no terminal:
+
+      ```
+      === MENU PRINCIPAL ===
+      1 - Relatórios
+      2 - Inserir Registros
+      3 - Atualizar Registros
+      4 - Remover Registros
+      0 - Sair
+      ```
+
+   ###### 7. Encerrar o ambiente virtual
+
+      ```bash
+      deactivate
+      ```
+
+
+## Relatórios Implementados
+
+1. **Relatório de Empréstimos Detalhados (JOIN):**
+   Exibe leitor, livro, data de empréstimo e devolução.
+
+2. **Relatório de Livros Mais Emprestados (GROUP BY):**
+   Mostra a contagem total de empréstimos por livro.
+
+
+## Dicas Extras
+
+* **Rodar o MySQL manualmente:**
+
+  ```bash
+  sudo service mysql start
+  ```
+* **Verificar status do banco:**
+
+  ```bash
+  sudo service mysql status
+  ```
+* **Encerrar banco:**
+
+  ```bash
+  sudo service mysql stop
+  ```
+
+## Solução de Problemas Comuns
+
+* *Erro:* mysql.connector.errors.ProgrammingError: 1045 (28000)
+
+   > As credenciais no arquivo authentication.mysql estão incorretas.
+
+* *Erro:* Table 'sistema_biblioteca.leitor' doesn't exist
+
+   > Execute novamente:
+
+      ```bash
+      python3 src/create_tables_and_records.py
+      ```
