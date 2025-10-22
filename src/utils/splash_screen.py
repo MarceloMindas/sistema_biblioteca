@@ -8,9 +8,9 @@ class SplashScreen:
         self.qry_total_livros = config.QUERY_COUNT.format(tabela="livro")
         self.qry_total_emprestimos = config.QUERY_COUNT.format(tabela="emprestimo")
 
-        self.created_by = "Seu Nome"
+        self.created_by = "Alexsander, Ester, João Paulo, Marcelo e Vanderson"
         self.disciplina = "Banco de Dados"
-        self.semestre = "2025/2"
+        self.professor = "Prof. M.Sc. Howard Roatti"
 
     def get_total_leitores(self):
         mysql = MySQLQueries()
@@ -31,14 +31,14 @@ class SplashScreen:
         return f"""
 ########################################################
 #              SISTEMA DE BIBLIOTECA                   #
-#                                                     #
-#  TOTAL DE REGISTROS:                                #
+#                                                      #
+#  TOTAL DE REGISTROS:                                 #
 #     1 - LEITORES:     {str(self.get_total_leitores()).rjust(5)}             #
 #     2 - LIVROS:       {str(self.get_total_livros()).rjust(5)}             #
 #     3 - EMPRÉSTIMOS:  {str(self.get_total_emprestimos()).rjust(5)}             #
-#                                                     #
-#  CRIADO POR: {self.created_by}                      #
-#  DISCIPLINA: {self.disciplina}                      #
-#  SEMESTRE:   {self.semestre}                        #
+#                                                      #
+#  CRIADO POR: {self.created_by}                       #
+#  DISCIPLINA: {self.disciplina}                       #
+#  PROFESSOR:   {self.professor}                       #
 ########################################################
 """
