@@ -4,14 +4,14 @@ MENU_PRINCIPAL = """
 2 - Inserir Registros
 3 - Atualizar Registros
 4 - Remover Registros
-0 - SAIR
+0 - Sair
 """
 
 MENU_RELATORIOS = """
 === RELATÓRIOS ===
 1 - Relatório de Empréstimos Detalhados
 2 - Relatório de Total de Empréstimos por Livros
-0 - SAIR
+0 - Sair
 """
 
 MENU_ENTIDADES = """
@@ -19,13 +19,13 @@ MENU_ENTIDADES = """
 1 - Leitores
 2 - Livros
 3 - Empréstimos
-0 - SAIR
+0 - Sair
 """
 
 QUERY_COUNT = 'select count(1) as total_{tabela} from {tabela}'
 
 
-def clear_console(wait_time: int = 2):
+def clear_console(wait_time: int = 1):
     '''
     Limpa a tela após alguns segundos.
     '''
