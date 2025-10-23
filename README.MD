@@ -1,129 +1,185 @@
-# Exemplo de Sistema em Python fazendo CRUD no Oracle
+# Sistema de Gerenciamento de Biblioteca Escolar - Python integrado com MySQL
 
-Esse sistema de exemplo é composto por um conjunto de tabelas que representam pedidos de vendas, contendo tabelas como: clientes, fornecedores, produtos, pedidos e itens de pedido.
+### Informações:
 
-O sistema exige que as tabelas existam, então basta executar o script Python a seguir para criação das tabelas e preenchimento de dados de exemplos:
-```shell
-~$ python create_tables_and_records.py
-```
+**Integrantes:** Alexsander Borchardt, Ester Bertolani, João Paulo Poubel, Marcelo Mindas, Vanderson de Almeida
 
-Para executar o sistema basta executar o script Python a seguir:
-```shell
-~$ python principal.py
-```
+**Disciplina:** Banco de Dados
 
-Para que possa testar as conexões com o banco de dados Oracle e o módulo Conexion desenvolvido para esse projeto, basta executar o script Python a seguir:
-```shell
-~$ python test.py
-```
+**Professor:** Howard Roatti Cruz
 
-## Organização
-- [diagrams](diagrams): Nesse diretório está o [diagrama relacional](diagrams/DIAGRAMA_RELACIONAL_PEDIDOS.pdf) (lógico) do sistema.
-    * O sistema possui cinco entidades: PRODUTOS, CLIENTES, FORNECEDORES, PEDIDOS e ITENS_PEDIDO
-- [sql](sql): Nesse diretório estão os scripts para criação das tabelas e inserção de dados fictícios para testes do sistema
-    * Certifique-se de que o usuário do banco possui todos os privilégios antes de executar os scripts de criação, caso ocorra erro, execute o comando a seguir com o superusuário via SQL Developer: `GRANT ALL PRIVILEGES TO LABDATABASE;`
-    * [create_tables_pedidos.sql](sql/create_tables_pedidos.sql): script responsável pela criação das tabelas, relacionamentos e criação de permissão no esquema LabDatabase.
-    * [inserting_samples_records.sql](sql/inserting_samples_records.sql): script responsável pela inserção dos registros fictícios para testes do sistema.
-    * [inserting_samples_related_records.sql](sql/inserting_samples_related_records.sql): script responsável pela inserção dos registros fictícios de pedidos e itens de pedidos para testes do sistema utilizando blocos PL/SQL.
-- [src](src): Nesse diretório estão os scripts do sistema
-    * [conexion](src/conexion): Nesse repositório encontra-se o [módulo de conexão com o banco de dados Oracle](src/conexion/oracle_queries.py). Esse módulo possui algumas funcionalidades úteis para execução de instruções DML e DDL, sendo possível obter JSON, Matriz e Pandas DataFrame.
-      - Exemplo de utilização para consultas simples:
+**Turma:** 4HC1A
 
-        ```python
-        def listar_clientes(self, oracle:OracleQueries, need_connect:bool=False):
-            query = """
-                    select c.cpf
-                        , c.nome 
-                    from clientes c
-                    order by c.nome
-                    """
-            if need_connect:
-                oracle.connect()
-            print(oracle.sqlToDataFrame(query))
-        ```
-      - Exemplo de utilização para alteração de registros
+**Vídeo de apresentação:** https://www.youtube.com/watch?v=94U1pQSlAb8
 
-        ```python
-        from conexion.oracle_queries import OracleQueries
-        def inserir_cliente(self) -> Cliente:
-            # Cria uma nova conexão com o banco que permite alteração
-            oracle = OracleQueries(can_write=True)
-            oracle.connect()
 
-            # Solicita ao usuario o novo CPF
-            cpf = input("CPF (Novo): ")
+## Descrição do Projeto
 
-            if self.verifica_existencia_cliente(oracle, cpf):
-                # Solicita ao usuario o novo nome
-                nome = input("Nome (Novo): ")
-                # Insere e persiste o novo cliente
-                oracle.write(f"insert into clientes values ('{cpf}', '{nome}')")
-                # Recupera os dados do novo cliente criado transformando em um DataFrame
-                df_cliente = oracle.sqlToDataFrame(f"select cpf, nome from clientes where cpf = '{cpf}'")
-                # Cria um novo objeto Cliente
-                novo_cliente = Cliente(df_cliente.cpf.values[0], df_cliente.nome.values[0])
-                # Exibe os atributos do novo cliente
-                print(novo_cliente.to_string())
-                # Retorna o objeto novo_cliente para utilização posterior, caso necessário
-                return novo_cliente
-            else:
-                print(f"O CPF {cpf} já está cadastrado.")
-                return None
-        ```
-      - Outros exemplos: [test.py](src/test.py)
-      - Caso esteja utilizando na máquina virtual antiga, você precisará alterar o método connect de:
-          ```python
-          self.conn = cx_Oracle.connect(user=self.user,
-                                  password=self.passwd,
-                                  dsn=self.connectionString()
-                                  )
-          ```
-        Para:
-          ```python
-          self.conn = cx_Oracle.connect(user=self.user,
-                                  password=self.passwd,
-                                  dsn=self.connectionString(in_container=True)
-                                  )
-          ```
-    * [controller](src/controller/): Nesse diretório encontram-sem as classes controladoras, responsáveis por realizar inserção, alteração e exclusão dos registros das tabelas.
-    * [model](src/model/): Nesse diretório encontram-ser as classes das entidades descritas no [diagrama relacional](diagrams/DIAGRAMA_RELACIONAL_PEDIDOS.pdf)
-    * [reports](src/reports/) Nesse diretório encontra-se a [classe](src/reports/relatorios.py) responsável por gerar todos os relatórios do sistema
-    * [sql](src/sql/): Nesse diretório encontram-se os scripts utilizados para geração dos relatórios a partir da [classe relatorios](src/reports/relatorios.py)
-    * [utils](src/utils/): Nesse diretório encontram-se scripts de [configuração](src/utils/config.py) e automatização da [tela de informações iniciais](src/utils/splash_screen.py)
-    * [create_tables_and_records.py](src/create_tables_and_records.py): Script responsável por criar as tabelas e registros fictícios. Esse script deve ser executado antes do script [principal.py](src/principal.py) para gerar as tabelas, caso não execute os scripts diretamente no SQL Developer ou em alguma outra IDE de acesso ao Banco de Dados.
-    * [principal.py](src/principal.py): Script responsável por ser a interface entre o usuário e os módulos de acesso ao Banco de Dados. Deve ser executado após a criação das tabelas.
+O **Sistema de Biblioteca** tem como objetivo gerenciar o cadastro de leitores, livros e empréstimos, permitindo o controle completo das operações de uma biblioteca acadêmica.
 
-### Bibliotecas Utilizadas
-- [requirements.txt](src/requirements.txt): `pip install -r requirements.txt`
+O sistema foi desenvolvido em **Python**, com integração ao **banco de dados MySQL**, simulando um sistema real de CRUD completo com persistência de dados, relatórios e controle de registros.
 
-#### Em caso de problemas com a execução dos software dando a seguinte mensagem `ORA-28001: the password has expired`, execute as linhas de comando a seguir no Oracle:
-- `ALTER PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED;`
-- `ALTER USER labdatabase IDENTIFIED BY "labDatabase2022";`
-- `ALTER USER labdatabase IDENTIFIED BY  "labDatabase2022";`
+O sistema implementa:
 
-### Instalando Oracle InstantClient
-- Baixe a versão do [InstantClient](https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html) de acordo com a versão do Banco de Dados
-- Caso esteja utilizando uma distribuição Linux baseado em Debian, será necessário executar o comando a seguir para converter o arquivo .rpm para .deb.
-  ```shell
-  sudo alien --scripts oracle-instantclient18.5-basic-18.5.0.0.0-3.x86_64.rpm
+   * **CRUD completo** (Create, Read, Update, Delete) para:
+      * *Leitores*
+      * *Livros*
+      * *Empréstimos*
+
+   * **Relatórios automatizados**, como:
+      1. *Relatório de empréstimos detalhados (JOIN entre tabelas)*
+      2. *Relatório de livros mais emprestados (GROUP BY)*
+
+## Estrutura do Projeto_
+
+   ```
+   .
+   ├── diagrams/                                   # Diagramas do banco e do sistema
+   ├── src/
+   │   ├── conexion/                               # Conexão com o banco de dados
+   │   │   ├── mysql_queries.py
+   │   │   └── passphrase/
+   │   │       └── authentication.mysql            # Credenciais do MySQL
+   │   ├── controller/                             # Controladores CRUD
+   │   │   ├── controller_leitor.py
+   │   │   ├── controller_livro.py
+   │   │   └── controller_emprestimo.py
+   │   ├── model/                                  # Classes de domínio (OOP)
+   │   │   ├── leitor.py
+   │   │   ├── livro.py
+   │   │   └── emprestimo.py
+   │   ├── reports/                                # Relatórios SQL e exibição
+   │   │   └── relatorios.py
+   │   ├── sql/                                    # Scripts SQL Relatórios   
+   │   │   ├── relatorio_1.sql
+   │   │   └── relatorio_2.sql
+   │   ├── utils/                                  # Funções auxiliares
+   │   │   ├── config.py
+   │   │   └── splash_screen.py
+   │   ├── create_tables_and_records.py            # Cria e popula o banco
+   │   ├── principal.py                            # Menu principal da aplicação
+   │   └── requirements.txt                        # Dependências Python
+   └── README.md
+   ```
+
+## Requisitos do Ambiente
+
+   ### Software Necessário:
+
+   * **Python 3.10+** instalado no sistema
+   * **MySQL Server** configurado e rodando localmente
+   * **VS Code**
+
+
+   Dependências listadas em:
+
+
+      src/requirements.txt
+   
+   
+   Instale as dependências com:
+
+
+      pip install -r src/requirements.txt
+
+
+
+## Execução do Projeto no Linux
+
+   #### 1. Clonar o repositório
+
+      git clone https://github.com/MarceloMindas/sistema_biblioteca.git
+      cd sistema_biblioteca
+
+   #### 2. Criar e ativar ambiente virtual
+
+      python3 -m venv venv
+      source venv/bin/activate
+
+
+   #### 3. Instalar dependências
+
+      pip install -r src/requirements.txt
+
+
+   #### 4. Configurar autenticação com o MySQL
+
+   * Edite o arquivo:
+      ```  
+      nano src/conexion/passphrase/authentication.mysql
+      ```
+
+   * Adicione suas credenciais no formato:
+      ```
+      usuario,senha
+      ```
+   
+   > Exemplo:
+
+      root,minhasenha123
+
+
+   #### 5. Criar tabelas e inserir dados iniciais
+
+      python3 src/create_tables_and_records.py
+
+
+   #### 6. Executar o sistema principal
+
+      python3 src/principal.py
+
+
+   O menu principal será exibido no terminal:
+
+      === MENU PRINCIPAL ===
+      1 - Relatórios
+      2 - Inserir Registros
+      3 - Atualizar Registros
+      4 - Remover Registros
+      0 - Sair
+
+
+   #### 7. Encerrar o ambiente virtual
+
+      deactivate
+
+
+## Relatórios Implementados
+
+1. **Relatório de Empréstimos Detalhados (JOIN):**
+   Exibe leitor, livro, data de empréstimo e devolução.
+
+2. **Relatório de Livros Mais Emprestados (GROUP BY):**
+   Mostra a contagem total de empréstimos por livro.
+
+
+## Dicas Extras
+
+* **Rodar o MySQL manualmente:**
+
+  ```bash
+  sudo service mysql start
   ```
-- Descompacte o arquivo e será gerado um diretório em um diretório de fácil acesso.
-- Mova os diretórios lib e share para dentro do diretório do InstantClient
-  ```shell
-  sudo mv lib /usr/local/oracle/instantclient_18_5/
+* **Verificar status do banco:**
+
+  ```bash
+  sudo service mysql status
   ```
-  
-  ```shell
-  sudo mv share instantclient_18_5/
-  ```
-- Edite o arquivo `.bash_profile` incluindo as linhas a seguir ao final do arquivo:
-  ```shell
-  export ORACLE_HOME=/usr/local/oracle/instantclient_18_5/lib/oracle/18.5/client64
-  export LD_LIBRARY_PATH=$ORACLE_HOME/lib
-  export PATH=$PATH:$ORACLE_HOME/bin
-  export PATH
+* **Encerrar banco:**
+
+  ```bash
+  sudo service mysql stop
   ```
 
-## Contato
-- [LinkedIn](https://linkedin.com/in/howardroatti)
-- [E-Mail](mailto:howardcruzroatti@gmail.com)
+## Solução de Problemas Comuns
+
+* *Erro:* mysql.connector.errors.ProgrammingError: 1045 (28000)
+
+   > As credenciais no arquivo authentication.mysql estão incorretas.
+
+* *Erro:* Table 'sistema_biblioteca.leitor' doesn't exist
+
+   > Execute novamente:
+
+      python3 src/create_tables_and_records.py
+
